@@ -1,6 +1,8 @@
 package goenvparse
 
 import (
+	"log"
+
 	"github.com/caarlos0/env"
 	"github.com/joho/godotenv"
 	"github.com/mcuadros/go-defaults"
@@ -11,7 +13,7 @@ func Parse(cfg interface{}, filenames ...string) error {
 
 	if len(filenames) > 0 {
 		if err := godotenv.Load(filenames...); err != nil {
-			return err
+			log.Println(err)
 		}
 	}
 

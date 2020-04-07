@@ -51,4 +51,19 @@ func TestParseEnv(t *testing.T) {
 	assert.Equal(t, c.Name, "from_env")
 	assert.Equal(t, c.Number, 3)
 	assert.Equal(t, c.Success, false)
+
+	os.Unsetenv("TEST_NAME")
+	os.Unsetenv("TEST_NUMBER")
+	os.Unsetenv("TEST_SUCCESS")
+}
+
+func TestParseNotExistsFile(t *testing.T) {
+	c := &config{}
+	err := Parse(c, "not-exists")
+
+	assert.Nil(t, err)
+
+	assert.Equal(t, c.Name, "simple")
+	assert.Equal(t, c.Number, 1)
+	assert.Equal(t, c.Success, true)
 }
